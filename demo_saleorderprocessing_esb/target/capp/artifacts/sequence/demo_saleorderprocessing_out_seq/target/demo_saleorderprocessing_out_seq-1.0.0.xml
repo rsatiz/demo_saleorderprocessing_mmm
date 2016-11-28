@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sequence name="demo_saleorderprocessing_out_seq" trace="disable" xmlns="http://ws.apache.org/ns/synapse">
+  <property name="WST_INTEGRATION_STEP" scope="default" type="STRING" value="demo_saleorderprocessing_out_seq"/>
+  <property name="WST_MSG" scope="default" type="STRING" value="inside demo_saleorderprocessing_out_seq sequence"/>
+  <sequence key="Common_localLogging_seq"/>
+  <send/>
+</sequence>

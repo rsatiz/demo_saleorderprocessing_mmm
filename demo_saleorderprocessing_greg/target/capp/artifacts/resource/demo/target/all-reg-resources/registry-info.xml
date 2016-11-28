@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?><resources>
+    <collection>
+        <directory>common</directory>
+        <path>/_system/governance/demo/common</path>
+    </collection>
+    <collection>
+        <directory>saleorder</directory>
+        <path>/_system/governance/demo/saleorder</path>
+    </collection>
+</resources>

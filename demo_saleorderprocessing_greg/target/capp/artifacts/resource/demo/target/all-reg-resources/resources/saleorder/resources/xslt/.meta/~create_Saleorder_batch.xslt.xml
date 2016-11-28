@@ -1,0 +1,3 @@
+<?xml version="1.0" encoding="UTF-8"?><resource name="create_Saleorder_batch.xslt" isCollection="false" path="/_system/governance/demo/demo_saleorderprocessing_greg/saleorder/resources/xslt/create_Saleorder_batch.xslt" registryUrl="https://localhost:9443/registry" status="added">
+    <mediaType>application/xslt+xml</mediaType>
+</resource>

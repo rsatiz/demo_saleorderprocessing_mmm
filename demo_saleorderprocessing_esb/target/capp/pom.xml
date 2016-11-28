@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd" xmlns="http://maven.apache.org/POM/4.0.0"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>com.example.demo_saleorderprocessing_esb</groupId>
+  <artifactId>demo_saleorderprocessing_esb_module</artifactId>
+  <version>1.0.0</version>
+  <packaging>pom</packaging>
+  <name>demo_saleorderprocessing_esb_module</name>
+  <description>demo_saleorderprocessing_esb_module</description>
+  <modules>
+    <module>artifacts\sequence\Common_localLogging_seq</module>
+    <module>artifacts\sequence\demo_saleorderprocessing_createso_gs_seq</module>
+    <module>artifacts\sequence\demo_saleorderprocessing_fetch_item_gs_seq</module>
+    <module>artifacts\sequence\demo_saleorderprocessing_main_seq</module>
+    <module>artifacts\sequence\demo_saleorderprocessing_out_seq</module>
+    <module>artifacts\sequence\demo_saleorderprocessing_total_quantity_aggregate_seq</module>
+    <module>artifacts\sequence\demo_saleorderprocessing_update_quantity_gs_seq</module>
+    <module>artifacts\sequence\demo_saleorderprocessing_errorhandler_seq</module>
+    <module>artifacts\sequence\demo_saleorderprocessing_deadletter_seq</module>
+    <module>artifacts\sequence\demo_saleorderprocessing_fetch_saleorder_seq</module>
+    <module>artifacts\sequence\demo_saleorderprocessing_retry_seq</module>
+    <module>artifacts\sequence\demo_saleorderprocessing_endpoint_seq</module>
+    <module>artifacts\proxy-service\demo_saleorderprocessing_proxy</module>
+    <module>artifacts\message-store\errorHandler_store</module>
+    <module>artifacts\message-store\DeadLetter_store</module>
+    <module>artifacts\message-processors\errorHandler_processor</module>
+    <module>artifacts\message-processors\retryHandler_processor</module>
+    <module>artifacts\sequence\demo_saleorderprocessing_fault_seq</module>
+  </modules>
+</project>

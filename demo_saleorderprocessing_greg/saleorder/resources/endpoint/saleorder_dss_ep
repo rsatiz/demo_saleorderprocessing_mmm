@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<endpoint xmlns="http://ws.apache.org/ns/synapse"
+          name="gov/demo/saleorder/resources/endpoint/saleorder_dss_ep">
+   <address uri="http://localhost:9767/services/SalesOrder_DSS?wsdl">
+      <suspendOnFailure>
+         <progressionFactor>1.0</progressionFactor>
+      </suspendOnFailure>
+      <markForSuspension>
+         <retriesBeforeSuspension>0</retriesBeforeSuspension>
+         <retryDelay>0</retryDelay>
+      </markForSuspension>
+      <timeout>
+         <responseAction>fault</responseAction>
+      </timeout>
+   </address>
+</endpoint>

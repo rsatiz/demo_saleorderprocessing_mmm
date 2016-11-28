@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sequence name="demo_saleorderprocessing_endpoint_seq"
+  onError="demo_saleorderprocessing_errorhandler_seq" trace="disable" xmlns="http://ws.apache.org/ns/synapse">
+  <sequence key="Common_localLogging_seq"/>
+  <send>
+    <endpoint key="gov:/demo/saleorder/resources/endpoint/saleorder_dss_ep"/>
+  </send>
+</sequence>

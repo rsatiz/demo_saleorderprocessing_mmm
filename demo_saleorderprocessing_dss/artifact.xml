@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="UTF-8"?><artifacts>
+    <artifact name="SalesOrder_DSS" groupId="com.example.demo_saleorderprocessing_dss.dataservice" version="1.0.0" type="service/dataservice" serverRole="DataServicesServer">
+        <file>dataservice/SalesOrder_DSS.dbs</file>
+    </artifact>
+</artifacts>

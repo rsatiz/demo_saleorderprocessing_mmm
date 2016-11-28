@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<messageStore
+  class="org.apache.synapse.message.store.impl.jdbc.JDBCMessageStore"
+  name="errorHandler_store" xmlns="http://ws.apache.org/ns/synapse">
+  <parameter name="store.producer.guaranteed.delivery.enable">true</parameter>
+  <parameter name="store.failover.message.store.name">errorHandler_store</parameter>
+  <parameter name="store.jdbc.password">root</parameter>
+  <parameter name="store.jdbc.username">root</parameter>
+  <parameter name="store.jdbc.driver">com.mysql.jdbc.Driver</parameter>
+  <parameter name="store.jdbc.connection.url">jdbc:mysql://localhost:3306/esbstore</parameter>
+  <parameter name="store.jdbc.table">esbstore</parameter>
+</messageStore>

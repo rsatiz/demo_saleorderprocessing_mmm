@@ -1,0 +1,3 @@
+<?xml version="1.0" encoding="UTF-8"?><resource name="SalesOrder_DSS.wsdl" isCollection="false" path="/_system/governance/demo/demo_saleorderprocessing_greg/saleorder/resources/wsdl/SalesOrder_DSS.wsdl" registryUrl="https://localhost:9443/registry" status="added">
+    <mediaType>application/wsdl+xml</mediaType>
+</resource>

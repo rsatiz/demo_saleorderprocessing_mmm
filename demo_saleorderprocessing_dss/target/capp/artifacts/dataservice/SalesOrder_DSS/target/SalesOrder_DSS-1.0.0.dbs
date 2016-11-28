@@ -1,0 +1,153 @@
+<data enableBatchRequests="true" enableBoxcarring="true" name="SalesOrder_DSS" transports="http https">
+    <config id="local_mongodb">
+        <property name="mongoDB_servers">localhost</property>
+        <property name="mongoDB_database">som</property>
+        <property name="mongoDB_write_concern">SAFE</property>
+        <property name="mongoDB_read_preference">PRIMARY</property>
+        <property name="mongoDB_autoConnectRetry">true</property>
+    </config>
+    <config id="gs">
+        <property name="driverClassName">org.wso2.carbon.dataservices.sql.driver.TDriver</property>
+        <property name="url">jdbc:wso2:gspread:filePath=https://docs.google.com/spreadsheets/d/1x1b-k85ghdx1-f1QrP_wxLHLO4H3gwTMZBd6-8-N8YM;sheetName=som;visibility=private;clientId=842514041200-aok1mnk3f4mikq79rjkev1dddodqhnfv.apps.googleusercontent.com;clientSecret=K-_dL0bB1dMa4chxBcabPZSM;refreshToken=1%252FyTc1-EuigDv7Vr-uYZbk_-H_BQGe2Wny_oaWpNWFS7M</property>
+    </config>
+    <query id="total_count" useConfig="local_mongodb">
+        <expression>saleorder.count()</expression>
+        <result element="Documents" rowName="Document">
+            <element column="document" name="Data" xsdType="string"/>
+        </result>
+    </query>
+    <query id="fetchsaleorder" useConfig="local_mongodb">
+        <expression>saleorder.find()</expression>
+        <result element="dataresponse" rowName="result">
+            <element column="document" name="Data" xsdType="string"/>
+        </result>
+    </query>
+    <query id="fetchItemByType" useConfig="local_mongodb">
+        <expression>itemdetails.find({ "type" :#})</expression>
+        <result element="dataresponse" rowName="result">
+            <element column="document" name="Data" xsdType="string"/>
+        </result>
+        <param name="type" sqlType="STRING"/>
+    </query>
+    <query id="fetchItemQuantity" useConfig="local_mongodb">
+        <expression>itemdetails.find({ "itemid" :#})</expression>
+        <result element="data" rowName="record">
+            <element column="document" name="Data" xsdType="string"/>
+        </result>
+        <param name="itemid" sqlType="STRING"/>
+    </query>
+    <query id="create_saleorder" useConfig="local_mongodb">
+        <expression>saleorder.insert("{custid:#, poid:#, custname:#,itemid:#,req_quantity:#}")</expression>
+        <param name="custid" sqlType="STRING"/>
+        <param name="poid" sqlType="STRING"/>
+        <param name="custname" sqlType="STRING"/>
+        <param name="itemid" sqlType="STRING"/>
+        <param name="req_quantity" sqlType="STRING"/>
+    </query>
+    <query id="update_itemdetails" useConfig="local_mongodb">
+        <expression>itemdetails.update({itemid: '1001'},{itemid:#,quantity:#,name:'iphone',type:'mobile'}, true)</expression>
+        <param name="itemid" sqlType="STRING"/>
+        <param name="quantity" sqlType="STRING"/>
+    </query>
+    <query id="create_saleorder_gs" useConfig="gs">
+        <sql>INSERT INTO saleorder (custid,poid,custname,itemid,quantity) VALUES (:custid,:poid,:custname,:itemid,:quantity)</sql>
+        <param name="custid" sqlType="STRING"/>
+        <param name="poid" sqlType="STRING"/>
+        <param name="custname" sqlType="STRING"/>
+        <param name="itemid" sqlType="STRING"/>
+        <param name="quantity" sqlType="STRING"/>
+    </query>
+    <query id="fetchsaleorder_gs" useConfig="gs">
+        <sql>SELECT custid,poid,custname,itemid,quantity FROM saleorder</sql>
+        <result element="dataresponse" rowName="result">
+            <element column="custid" name="custid" xsdType="string"/>
+            <element column="poid" name="poid" xsdType="string"/>
+            <element column="custname" name="custname" xsdType="string"/>
+            <element column="itemid" name="itemid" xsdType="string"/>
+            <element column="quantity" name="quantity" xsdType="string"/>
+        </result>
+    </query>
+    <query id="fetchItemQuantity_gs" useConfig="gs">
+        <sql>SELECT quantity FROM itemdetail where itemid=:itemid</sql>
+        <result element="data" rowName="record">
+            <element column="quantity" name="quantity" xsdType="string"/>
+        </result>
+        <param name="itemid" sqlType="STRING"/>
+    </query>
+    <query id="fetchItemByType_gs" useConfig="gs">
+        <sql>SELECT itemid,name,type,quantity FROM itemdetail where type=:type OR name=:name</sql>
+        <result element="dataresponse" rowName="result">
+            <element column="itemid" name="itemid" xsdType="string"/>
+            <element column="name" name="name" xsdType="string"/>
+            <element column="type" name="type" xsdType="string"/>
+            <element column="quantity" name="quantity" xsdType="string"/>
+        </result>
+        <param name="type" sqlType="STRING"/>
+        <param name="name" sqlType="STRING"/>
+    </query>
+    <query id="updateItemQuantity_gs" useConfig="gs">
+        <sql>UPDATE itemdetail SET quantity=:value WHERE itemid=:itemid</sql>
+        <result element="UpdatedRowCount" rowName="" useColumnNumbers="true">
+            <element column="1" name="Value" xsdType="integer"/>
+        </result>
+        <param name="value" sqlType="STRING"/>
+        <param name="itemid" sqlType="STRING"/>
+    </query>
+    <operation name="fetchallsaleorder">
+        <call-query href="fetchsaleorder"/>
+    </operation>
+    <operation name="fetchallsaleorder_gs">
+        <call-query href="fetchsaleorder_gs"/>
+    </operation>
+    <operation name="fetchItemByType">
+        <call-query href="fetchItemByType">
+            <with-param name="type" query-param="type"/>
+        </call-query>
+    </operation>
+    <operation returnRequestStatus="true" name="createSaleOrder">
+        <call-query href="create_saleorder">
+            <with-param name="custid" query-param="custid"/>
+            <with-param name="poid" query-param="poid"/>
+            <with-param name="custname" query-param="custname"/>
+            <with-param name="itemid" query-param="itemid"/>
+            <with-param name="req_quantity" query-param="req_quantity"/>
+        </call-query>
+    </operation>
+    <operation returnRequestStatus="true" name="updateItemsDetails">
+        <call-query href="update_itemdetails">
+            <with-param name="quantity" query-param="quantity"/>
+            <with-param name="itemid" query-param="itemid"/>
+        </call-query>
+    </operation>
+    <operation returnRequestStatus="true" name="createSaleOrder_gs">
+        <call-query href="create_saleorder_gs">
+            <with-param name="custid" query-param="custid"/>
+            <with-param name="poid" query-param="poid"/>
+            <with-param name="custname" query-param="custname"/>
+            <with-param name="itemid" query-param="itemid"/>
+            <with-param name="quantity" query-param="quantity"/>
+        </call-query>
+    </operation>
+    <operation name="fetchItemByType_gs">
+        <call-query href="fetchItemByType_gs">
+            <with-param name="type" query-param="type"/>
+            <with-param name="name" query-param="name"/>
+        </call-query>
+    </operation>
+    <operation name="updateItemQuantity_gs">
+        <call-query href="updateItemQuantity_gs">
+            <with-param name="value" query-param="value"/>
+            <with-param name="itemid" query-param="itemid"/>
+        </call-query>
+    </operation>
+    <operation name="fetchItemQuantity_gs">
+        <call-query href="fetchItemQuantity_gs">
+            <with-param name="itemid" query-param="itemid"/>
+        </call-query>
+    </operation>
+    <operation name="fetchItemQuantity">
+        <call-query href="fetchItemQuantity">
+            <with-param name="itemid" query-param="itemid"/>
+        </call-query>
+    </operation>
+</data>

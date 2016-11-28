@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sequence name="demo_saleorderprocessing_update_quantity_gs_seq"
+  trace="disable" xmlns="http://ws.apache.org/ns/synapse">
+  <property name="WST_INTEGRATION_STEP" scope="default" type="STRING" value="demo_saleorderprocessing_update_quantity_gs_seq"/>
+  <property expression="//dat:itemid" name="itemid" scope="default"
+    type="STRING" xmlns:dat="http://ws.wso2.org/dataservice"/>
+  <property expression="//dat:quantity" name="adjustvalue"
+    scope="default" type="STRING" xmlns:dat="http://ws.wso2.org/dataservice"/>
+  <property expression="//dat:adjustmenttype" name="stockAdjust"
+    scope="default" type="STRING" xmlns:dat="http://ws.wso2.org/dataservice"/>
+  <property name="WST_MSG" scope="default" type="STRING" value="inside demo_saleorderprocessing_update_quantity_gs_seq sequence"/>
+  <sequence key="Common_localLogging_seq"/>
+  <payloadFactory media-type="xml">
+    <format>
+      <dat:fetchItemQuantity_gs xmlns:dat="http://ws.wso2.org/dataservice">
+        <dat:itemid>$1</dat:itemid>
+      </dat:fetchItemQuantity_gs>
+    </format>
+    <args>
+      <arg evaluator="xml" expression="//dat:itemid"
+        xmlns:dat="http://ws.wso2.org/dataservice" xmlns:ns="http://org.apache.synapse/xsd"/>
+    </args>
+  </payloadFactory>
+  <header name="Action" scope="default" value="urn:fetchItemQuantity_gs"/>
+  <call>
+    <endpoint key="gov:/demo/saleorder/resources/endpoint/saleorder_dss_ep"/>
+  </call>
+  <property expression="//dat:quantity" name="quantity" scope="default"
+    type="STRING" xmlns:dat="http://ws.wso2.org/dataservice"/>
+  <filter regex="increment" source="get-property('stockAdjust')" xmlns:ns="http://org.apache.synapse/xsd">
+    <then>
+      <log>
+        <property name="quantityAdjustquantityAdjust" value="increment"/>
+      </log>
+      <property
+        expression="number(number(get-property('adjustvalue'))+number(//dat:quantity))"
+        name="quantityAdjust" scope="default" type="STRING" xmlns:dat="http://ws.wso2.org/dataservice"/>
+    </then>
+    <else>
+      <property
+        expression="number(number(get-property('adjustvalue'))-number(//dat:quantity))"
+        name="quantityAdjust" scope="default" type="STRING" xmlns:dat="http://ws.wso2.org/dataservice"/>
+    </else>
+  </filter>
+  <payloadFactory media-type="xml">
+    <format>
+      <dat:updateItemQuantity_gs xmlns:dat="http://ws.wso2.org/dataservice">
+        <dat:value>$1</dat:value>
+        <dat:itemid>$2</dat:itemid>
+      </dat:updateItemQuantity_gs>
+    </format>
+    <args>
+      <arg evaluator="xml"
+        expression="fn:substring(get-property('quantityAdjust'),1,fn:string-length(get-property('quantityAdjust')))"
+        xmlns:ns3="http://org.apache.synapse/xsd" xmlns:soapenv="http://www.w3.org/2003/05/soap-envelope"/>
+      <arg evaluator="xml" expression="get-property('itemid')"
+        xmlns:ns3="http://org.apache.synapse/xsd" xmlns:soapenv="http://www.w3.org/2003/05/soap-envelope"/>
+    </args>
+  </payloadFactory>
+  <header name="Action" scope="default" value="urn:updateItemQuantity_gs"/>
+  <property name="WST_MSG" scope="default" type="STRING" value="After Stock Adjust"/>
+  <sequence key="Common_localLogging_seq"/>
+  <sequence key="demo_saleorderprocessing_endpoint_seq"/>
+</sequence>

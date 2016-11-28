@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?><resources>
+    <collection>
+        <directory>properties</directory>
+        <path>/_system/governance/demo/common/utils/properties</path>
+    </collection>
+</resources>

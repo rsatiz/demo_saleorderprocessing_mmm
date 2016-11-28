@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<template xmlns="http://ws.apache.org/ns/synapse" name="standard_logging_st">
+    <parameter name="WST_INTEGRATION_NAME"/>
+    <parameter name="WST_INTEGRATION_STEP"/>
+    <parameter name="WST_CORRELATION_ID"/>
+    <parameter name="WST_CODE"/>
+    <parameter name="WST_MSG"/>
+    <parameter name="WST_CATEGORY"/>
+    <parameter name="WST_LEVEL"/>
+    <parameter name="WST_DROP_YN"/>
+    <sequence>
+        <property name="EMPTY_STRING" value="&quot;&quot;" scope="default" type="STRING"/>
+        <filter xmlns:ns2="http://org.apache.synapse/xsd" xmlns:ns="http://org.apache.synapse/xsd" source="$func:WST_INTEGRATION_NAME" regex="^$">
+            <then>
+                <property name="INTEGRATION_NAME" expression="get-property('EMPTY_STRING')" scope="default" type="STRING"/>
+            </then>
+            <else>
+                <property name="INTEGRATION_NAME" expression="$func:WST_INTEGRATION_NAME')" scope="default" type="STRING"/>
+            </else>
+        </filter>
+        <filter xmlns:ns2="http://org.apache.synapse/xsd" xmlns:ns="http://org.apache.synapse/xsd" source="$func:WST_INTEGRATION_STEP" regex="^$">
+            <then>
+                <property name="INTEGRATION_STEP" expression="get-property('EMPTY_STRING')" scope="default" type="STRING"/>
+            </then>
+            <else>
+                <property name="INTEGRATION_STEP" expression="$func:WST_INTEGRATION_STEP')" scope="default" type="STRING"/>
+            </else>
+        </filter>
+        <filter xmlns:ns2="http://org.apache.synapse/xsd" xmlns:ns="http://org.apache.synapse/xsd" source="$func:WST_CORRELATION_ID" regex="^$">
+            <then>
+                <property name="CORRELATION_ID" expression="get-property('EMPTY_STRING')" scope="default" type="STRING"/>
+            </then>
+            <else>
+                <property name="CORRELATION_ID" expression="$func:WST_CORRELATION_ID')" scope="default" type="STRING"/>
+            </else>
+        </filter>
+        <filter xmlns:ns2="http://org.apache.synapse/xsd" xmlns:ns="http://org.apache.synapse/xsd" source="$func:WST_CODE" regex="^$">
+            <then>
+                <property name="WST_CODE" expression="get-property('EMPTY_STRING')" scope="default" type="STRING"/>
+            </then>
+            <else>
+                <property name="WST_CODE" expression="$func:WST_CODE')" scope="default" type="STRING"/>
+            </else>
+        </filter>
+        <filter xmlns:ns2="http://org.apache.synapse/xsd" xmlns:ns="http://org.apache.synapse/xsd" source="$func:WST_MSG" regex="^$">
+            <then>
+                <property name="WST_MSG" expression="get-property('EMPTY_STRING')" scope="default" type="STRING"/>
+            </then>
+            <else>
+                <property name="WST_MSG" expression="$func:WST_MSG')" scope="default" type="STRING"/>
+            </else>
+        </filter>
+        <switch source="$func:WST_LEVEL">
+            <case regex="(?i)full">
+                <switch source="$func:WST_CATEGORY">
+                    <case regex="(?i)DEBUG">
+                        <log level="full" category="DEBUG">
+                            <property xmlns:ns2="http://org.apache.synapse/xsd" xmlns:ns="http://org.apache.synapse/xsd" name="INTEGRATION_NAME" expression="get-property('INTEGRATION_NAME')"/>
+                            <property xmlns:ns2="http://org.apache.synapse/xsd" xmlns:ns="http://org.apache.synapse/xsd" name="INTEGRATION_STEP" expression="get-property('INTEGRATION_STEP')"/>
+                            <property xmlns:ns2="http://org.apache.synapse/xsd" xmlns:ns="http://org.apache.synapse/xsd" name="CORRELATION_ID" expression="get-property('CORRELATION_ID')"/>
+                            <property xmlns:ns2="http://org.apache.synapse/xsd" xmlns:ns="http://org.apache.synapse/xsd" name="CODE" expression="get-property('WST_CODE')"/>
+                            <property xmlns:ns2="http://org.apache.synapse/xsd" xmlns:ns="http://org.apache.synapse/xsd" name="MSG" expression="get-property('WST_MSG')"/>
+                        </log>
+                    </case>
+                    <case regex="(?i)WARN">
+                        <log level="full" category="WARN">
+                            <property xmlns:ns2="http://org.apache.synapse/xsd" xmlns:ns="http://org.apache.synapse/xsd" name="INTEGRATION_NAME" expression="get-property('INTEGRATION_NAME')"/>
+                            <property xmlns:ns2="http://org.apache.synapse/xsd" xmlns:ns="http://org.apache.synapse/xsd" name="INTEGRATION_STEP" expression="get-property('INTEGRATION_STEP')"/>
+                            <property xmlns:ns2="http://org.apache.synapse/xsd" xmlns:ns="http://org.apache.synapse/xsd" name="CORRELATION_ID" expression="get-property('CORRELATION_ID')"/>
+                            <property xmlns:ns2="http://org.apache.synapse/xsd" xmlns:ns="http://org.apache.synapse/xsd" name="CODE" expression="get-property('WST_CODE')"/>
+                            <property xmlns:ns2="http://org.apache.synapse/xsd" xmlns:ns="http://org.apache.synapse/xsd" name="MSG" expression="get-property('WST_MSG')"/>
+                        </log>
+                    </case>
+                    <case regex="(?i)ERROR">
+                        <log level="full" category="ERROR">
+                            <property xmlns:ns2="http://org.apache.synapse/xsd" xmlns:ns="http://org.apache.synapse/xsd" name="INTEGRATION_NAME" expression="get-property('INTEGRATION_NAME')"/>
+                            <property xmlns:ns2="http://org.apache.synapse/xsd" xmlns:ns="http://org.apache.synapse/xsd" name="INTEGRATION_STEP" expression="get-property('INTEGRATION_STEP')"/>
+                            <property xmlns:ns2="http://org.apache.synapse/xsd" xmlns:ns="http://org.apache.synapse/xsd" name="CORRELATION_ID" expression="get-property('CORRELATION_ID')"/>
+                            <property xmlns:ns2="http://org.apache.synapse/xsd" xmlns:ns="http://org.apache.synapse/xsd" name="CODE" expression="get-property('WST_CODE')"/>
+                            <property xmlns:ns2="http://org.apache.synapse/xsd" xmlns:ns="http://org.apache.synapse/xsd" name="MSG" expression="get-property('WST_MSG')"/>
+                        </log>
+                    </case>
+                    <default>
+                        <log level="full">
+                            <property xmlns:ns2="http://org.apache.synapse/xsd" xmlns:ns="http://org.apache.synapse/xsd" name="INTEGRATION_NAME" expression="get-property('INTEGRATION_NAME')"/>
+                            <property xmlns:ns2="http://org.apache.synapse/xsd" xmlns:ns="http://org.apache.synapse/xsd" name="INTEGRATION_STEP" expression="get-property('INTEGRATION_STEP')"/>
+                            <property xmlns:ns2="http://org.apache.synapse/xsd" xmlns:ns="http://org.apache.synapse/xsd" name="CORRELATION_ID" expression="get-property('CORRELATION_ID')"/>
+                            <property xmlns:ns2="http://org.apache.synapse/xsd" xmlns:ns="http://org.apache.synapse/xsd" name="CODE" expression="get-property('WST_CODE')"/>
+                            <property xmlns:ns2="http://org.apache.synapse/xsd" xmlns:ns="http://org.apache.synapse/xsd" name="MSG" expression="get-property('WST_MSG')"/>
+                        </log>
+                    </default>
+                </switch>
+                <filter source="get-property('To')" regex="default_regex">
+                    <then/>
+                    <else/>
+                </filter>
+            </case>
+            <case regex="(?i)simple">
+                <switch source="$func:WST_CATEGORY">
+                    <case regex="(?i)DEBUG">
+                        <log category="DEBUG">
+                            <property xmlns:ns2="http://org.apache.synapse/xsd" xmlns:ns="http://org.apache.synapse/xsd" name="INTEGRATION_NAME" expression="get-property('INTEGRATION_NAME')"/>
+                            <property xmlns:ns2="http://org.apache.synapse/xsd" xmlns:ns="http://org.apache.synapse/xsd" name="INTEGRATION_STEP" expression="get-property('INTEGRATION_STEP')"/>
+                            <property xmlns:ns2="http://org.apache.synapse/xsd" xmlns:ns="http://org.apache.synapse/xsd" name="CORRELATION_ID" expression="get-property('CORRELATION_ID')"/>
+                            <property xmlns:ns2="http://org.apache.synapse/xsd" xmlns:ns="http://org.apache.synapse/xsd" name="CODE" expression="get-property('WST_CODE')"/>
+                            <property xmlns:ns2="http://org.apache.synapse/xsd" xmlns:ns="http://org.apache.synapse/xsd" name="MSG" expression="get-property('WST_MSG')"/>
+                        </log>
+                    </case>
+                    <case regex="(?i)WARN">
+                        <log category="WARN">
+                            <property xmlns:ns2="http://org.apache.synapse/xsd" xmlns:ns="http://org.apache.synapse/xsd" name="INTEGRATION_NAME" expression="get-property('INTEGRATION_NAME')"/>
+                            <property xmlns:ns2="http://org.apache.synapse/xsd" xmlns:ns="http://org.apache.synapse/xsd" name="INTEGRATION_STEP" expression="get-property('INTEGRATION_STEP')"/>
+                            <property xmlns:ns2="http://org.apache.synapse/xsd" xmlns:ns="http://org.apache.synapse/xsd" name="CORRELATION_ID" expression="get-property('CORRELATION_ID')"/>
+                            <property xmlns:ns2="http://org.apache.synapse/xsd" xmlns:ns="http://org.apache.synapse/xsd" name="CODE" expression="get-property('WST_CODE')"/>
+                            <property xmlns:ns2="http://org.apache.synapse/xsd" xmlns:ns="http://org.apache.synapse/xsd" name="MSG" expression="get-property('WST_MSG')"/>
+                        </log>
+                    </case>
+                    <case regex="(?i)ERROR">
+                        <log category="ERROR">
+                            <property xmlns:ns2="http://org.apache.synapse/xsd" xmlns:ns="http://org.apache.synapse/xsd" name="INTEGRATION_NAME" expression="get-property('INTEGRATION_NAME')"/>
+                            <property xmlns:ns2="http://org.apache.synapse/xsd" xmlns:ns="http://org.apache.synapse/xsd" name="INTEGRATION_STEP" expression="get-property('INTEGRATION_STEP')"/>
+                            <property xmlns:ns2="http://org.apache.synapse/xsd" xmlns:ns="http://org.apache.synapse/xsd" name="CORRELATION_ID" expression="get-property('CORRELATION_ID')"/>
+                            <property xmlns:ns2="http://org.apache.synapse/xsd" xmlns:ns="http://org.apache.synapse/xsd" name="CODE" expression="get-property('WST_CODE')"/>
+                            <property xmlns:ns2="http://org.apache.synapse/xsd" xmlns:ns="http://org.apache.synapse/xsd" name="MSG" expression="get-property('WST_MSG')"/>
+                        </log>
+                    </case>
+                    <default>
+                        <log>
+                            <property xmlns:ns2="http://org.apache.synapse/xsd" xmlns:ns="http://org.apache.synapse/xsd" name="INTEGRATION_NAME" expression="get-property('INTEGRATION_NAME')"/>
+                            <property xmlns:ns2="http://org.apache.synapse/xsd" xmlns:ns="http://org.apache.synapse/xsd" name="INTEGRATION_STEP" expression="get-property('INTEGRATION_STEP')"/>
+                            <property xmlns:ns2="http://org.apache.synapse/xsd" xmlns:ns="http://org.apache.synapse/xsd" name="CORRELATION_ID" expression="get-property('CORRELATION_ID')"/>
+                            <property xmlns:ns2="http://org.apache.synapse/xsd" xmlns:ns="http://org.apache.synapse/xsd" name="CODE" expression="get-property('WST_CODE')"/>
+                            <property xmlns:ns2="http://org.apache.synapse/xsd" xmlns:ns="http://org.apache.synapse/xsd" name="MSG" expression="get-property('WST_MSG')"/>
+                        </log>
+                    </default>
+                </switch>
+            </case>
+            <default>
+                <log>
+                    <property xmlns:ns2="http://org.apache.synapse/xsd" xmlns:ns="http://org.apache.synapse/xsd" name="INTEGRATION_NAME" expression="get-property('INTEGRATION_NAME')"/>
+                    <property xmlns:ns2="http://org.apache.synapse/xsd" xmlns:ns="http://org.apache.synapse/xsd" name="INTEGRATION_STEP" expression="get-property('INTEGRATION_STEP')"/>
+                    <property xmlns:ns2="http://org.apache.synapse/xsd" xmlns:ns="http://org.apache.synapse/xsd" name="CORRELATION_ID" expression="get-property('CORRELATION_ID')"/>
+                    <property xmlns:ns2="http://org.apache.synapse/xsd" xmlns:ns="http://org.apache.synapse/xsd" name="CODE" expression="get-property('WST_CODE')"/>
+                    <property xmlns:ns2="http://org.apache.synapse/xsd" xmlns:ns="http://org.apache.synapse/xsd" name="MSG" expression="get-property('WST_MSG')"/>
+                </log>
+            </default>
+        </switch>
+        <filter xmlns:ns2="http://org.apache.synapse/xsd" xmlns:ns="http://org.apache.synapse/xsd" source="$func:WST_DROP_YN" regex="(?i)y">
+            <then>
+                <log category="WARN">
+                    <property name="INTEGRATION_NAME" expression="get-property('INTEGRATION_NAME')"/>
+                    <property name="INTEGRATION_STEP" expression="get-property('INTEGRATION_STEP')"/>
+                    <property name="REQUESTED_ACTION" value="Performing drop"/>
+                </log>
+                <drop/>
+            </then>
+            <else/>
+        </filter>
+    </sequence>
+</template>

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<messageProcessor
+  class="org.apache.synapse.message.processor.impl.forwarder.ScheduledMessageForwardingProcessor"
+  messageStore="errorHandler_store" name="errorHandler_processor"
+  targetEndpoint="gov:/demo/saleorder/resources/endpoint/saleorder_dss_ep" xmlns="http://ws.apache.org/ns/synapse">
+  <parameter name="max.delivery.drop">Enabled</parameter>
+  <parameter name="message.processor.reply.sequence">demo_saleorderprocessing_out_seq</parameter>
+  <parameter name="max.delivery.attempts">4</parameter>
+  <parameter name="client.retry.interval">10000</parameter>
+  <parameter name="member.count">1</parameter>
+  <parameter name="interval">10000</parameter>
+  <parameter name="throttle">false</parameter>
+  <parameter name="target.endpoint">gov:/demo/saleorder/resources/endpoint/saleorder_dss_ep</parameter>
+  <parameter name="message.processor.fault.sequence">demo_saleorderprocessing_deadletter_seq</parameter>
+  <parameter name="is.active">true</parameter>
+</messageProcessor>

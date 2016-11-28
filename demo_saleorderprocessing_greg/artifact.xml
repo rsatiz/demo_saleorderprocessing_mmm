@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?><artifacts>
+    <artifact name="demo" groupId="com.example.demo_saleorderprocessing_greg.resource" version="1.0.0" type="registry/resource" serverRole="GovernanceRegistry">
+        <collection>
+            <directory>common</directory>
+            <path>/_system/governance/demo/common</path>
+        </collection>
+        <collection>
+            <directory>saleorder</directory>
+            <path>/_system/governance/demo/saleorder</path>
+        </collection>
+    </artifact>
+    <artifact name="properties" groupId="com.example.demo_saleorderprocessing_greg.resource" version="1.0.0" type="registry/resource" serverRole="GovernanceRegistry">
+        <collection>
+            <directory>properties</directory>
+            <path>/_system/governance/demo/common/utils/properties</path>
+        </collection>
+    </artifact>
+</artifacts>

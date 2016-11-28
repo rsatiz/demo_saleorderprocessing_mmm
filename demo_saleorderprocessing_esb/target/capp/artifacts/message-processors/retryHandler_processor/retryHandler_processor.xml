@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<messageProcessor
+  class="org.apache.synapse.message.processor.impl.sampler.SamplingProcessor"
+  messageStore="errorHandler_store" name="retryHandler_processor" xmlns="http://ws.apache.org/ns/synapse">
+  <parameter name="interval">10000</parameter>
+  <parameter name="sequence">demo_saleorderprocessing_retry_seq</parameter>
+  <parameter name="concurrency">1</parameter>
+  <parameter name="is.active">false</parameter>
+</messageProcessor>

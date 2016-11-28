@@ -1,0 +1,372 @@
+<wsdl:definitions xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:ns0="http://ws.wso2.org/dataservice" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="http://ws.wso2.org/dataservice">
+	<wsdl:documentation/>
+	<wsdl:types>
+		<xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified" targetNamespace="http://ws.wso2.org/dataservice">
+			<xs:element name="DataServiceFault">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="error_code" type="xs:string"/>
+						<xs:element name="error_message" type="xs:string"/>
+						<xs:element name="error_detail" type="xs:string"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="REQUEST_STATUS" type="xs:string"/>
+			<xs:element name="DATA_SERVICE_RESPONSE">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:any minOccurs="0"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="fetchItemByType">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="type" nillable="true" type="xs:string"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="Documents" type="ns0:Documents"/>
+			<xs:complexType name="Documents">
+				<xs:sequence>
+					<xs:element maxOccurs="unbounded" minOccurs="0" name="Document" type="ns0:Document"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="Document">
+				<xs:sequence>
+					<xs:element name="Data" nillable="true" type="xs:string"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:element name="fetchallsaleorder">
+				<xs:complexType>
+					<xs:sequence/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="dataresponse" type="ns0:dataresponse"/>
+			<xs:complexType name="dataresponse">
+				<xs:sequence>
+					<xs:element maxOccurs="unbounded" minOccurs="0" name="result" type="ns0:result"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:element name="createSaleOrder">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="custid" nillable="true" type="xs:string"/>
+						<xs:element name="poid" nillable="true" type="xs:string"/>
+						<xs:element name="custname" nillable="true" type="xs:string"/>
+						<xs:element name="itemlist" nillable="true" type="ns0:itemlist"/>
+						<xs:element name="storeindicator" nillable="true" type="xs:string"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="updateItemsDetails">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="itemid" nillable="true" type="xs:string"/>
+						<xs:element name="quantity" nillable="true" type="xs:string"/>
+						<xs:element name="storeindicator" nillable="true" type="xs:string"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="UpdatedRowCount" type="ns0:UpdatedRowCount"/>
+			<xs:complexType name="UpdatedRowCount">
+				<xs:sequence>
+					<xs:element minOccurs="0" name="Value" nillable="true" type="xs:integer"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:element name="itemlist" type="ns0:itemlist"/>
+			<xs:complexType name="itemlist">
+				<xs:sequence>
+					<xs:element maxOccurs="unbounded" minOccurs="1" name="item" type="ns0:item"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="item">
+				<xs:sequence>
+					<xs:element name="itemid" nillable="true" type="xs:string"/>
+					<xs:element name="quantity" nillable="true" type="xs:string"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:element name="data" type="ns0:data"/>
+			<xs:complexType name="data">
+				<xs:sequence>
+					<xs:element maxOccurs="unbounded" minOccurs="0" name="record" type="ns0:record"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="record">
+				<xs:sequence>
+					<xs:element name="itemid" nillable="true" type="xs:string"/>
+					<xs:element name="name" nillable="true" type="xs:string"/>
+					<xs:element name="type" nillable="true" type="xs:string"/>
+					<xs:element name="quantity" nillable="true" type="xs:string"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:element name="fetchItemQuantity">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="itemid" nillable="true" type="xs:string"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+		</xs:schema>
+	</wsdl:types>
+	<wsdl:message name="DataServiceFault">
+		<wsdl:part name="parameters" element="ns0:DataServiceFault"/>
+	</wsdl:message>
+	<wsdl:message name="createSaleOrderRequest">
+		<wsdl:part name="parameters" element="ns0:createSaleOrder"/>
+	</wsdl:message>
+	<wsdl:message name="createSaleOrderResponse">
+		<wsdl:part name="parameters" element="ns0:REQUEST_STATUS"/>
+	</wsdl:message>
+	<wsdl:message name="fetchallsaleorderRequest">
+		<wsdl:part name="parameters" element="ns0:fetchallsaleorder"/>
+	</wsdl:message>
+	<wsdl:message name="fetchallsaleorderResponse">
+		<wsdl:part name="parameters" element="ns0:Documents"/>
+	</wsdl:message>
+	<wsdl:message name="updateItemsDetailsRequest">
+		<wsdl:part name="parameters" element="ns0:updateItemsDetails"/>
+	</wsdl:message>
+	<wsdl:message name="updateItemsDetailsResponse">
+		<wsdl:part name="parameters" element="ns0:REQUEST_STATUS"/>
+	</wsdl:message>
+	<wsdl:message name="fetchItemByTypeRequest">
+		<wsdl:part name="parameters" element="ns0:fetchItemByType"/>
+	</wsdl:message>
+	<wsdl:message name="fetchItemByTypeResponse">
+		<wsdl:part name="parameters" element="ns0:Documents"/>
+	</wsdl:message>
+	<wsdl:message name="fetchItemQuantityRequest">
+		<wsdl:part name="parameters" element="ns0:fetchItemQuantity"/>
+	</wsdl:message>
+	<wsdl:message name="fetchItemQuantityResponse">
+		<wsdl:part name="parameters" element="ns0:data"/>
+	</wsdl:message>
+	<wsdl:portType name="SalesOrder_DSSPortType">
+		<wsdl:operation name="createSaleOrder">
+			<wsdl:documentation/>
+			<wsdl:input message="ns0:createSaleOrderRequest" wsaw:Action="urn:createSaleOrder"/>
+			<wsdl:output message="ns0:createSaleOrderResponse" wsaw:Action="urn:createSaleOrderResponse"/>
+			<wsdl:fault message="ns0:DataServiceFault" name="DataServiceFault" wsaw:Action="urn:createSaleOrderDataServiceFault"/>
+		</wsdl:operation>
+		<wsdl:operation name="fetchallsaleorder">
+			<wsdl:documentation/>
+			<wsdl:input message="ns0:fetchallsaleorderRequest" wsaw:Action="urn:fetchallsaleorder"/>
+			<wsdl:output message="ns0:fetchallsaleorderResponse" wsaw:Action="urn:fetchallsaleorderResponse"/>
+			<wsdl:fault message="ns0:DataServiceFault" name="DataServiceFault" wsaw:Action="urn:fetchallsaleorderDataServiceFault"/>
+		</wsdl:operation>
+		<wsdl:operation name="updateItemsDetails">
+			<wsdl:documentation/>
+			<wsdl:input message="ns0:updateItemsDetailsRequest" wsaw:Action="urn:updateItemsDetails"/>
+			<wsdl:output message="ns0:updateItemsDetailsResponse" wsaw:Action="urn:updateItemsDetailsResponse"/>
+			<wsdl:fault message="ns0:DataServiceFault" name="DataServiceFault" wsaw:Action="urn:updateItemsDetailsDataServiceFault"/>
+		</wsdl:operation>
+		<wsdl:operation name="fetchItemByType">
+			<wsdl:documentation/>
+			<wsdl:input message="ns0:fetchItemByTypeRequest" wsaw:Action="urn:fetchItemByType"/>
+			<wsdl:output message="ns0:fetchItemByTypeResponse" wsaw:Action="urn:fetchItemByTypeResponse"/>
+			<wsdl:fault message="ns0:DataServiceFault" name="DataServiceFault" wsaw:Action="urn:fetchItemByTypeDataServiceFault"/>
+		</wsdl:operation>
+		<wsdl:operation name="fetchItemQuantity">
+			<wsdl:documentation/>
+			<wsdl:input message="ns0:fetchItemQuantityRequest" wsaw:Action="urn:fetchItemQuantity"/>
+			<wsdl:output message="ns0:fetchItemQuantityResponse" wsaw:Action="urn:fetchItemQuantityResponse"/>
+			<wsdl:fault message="ns0:DataServiceFault" name="DataServiceFault" wsaw:Action="urn:fetchItemQuantityDataServiceFault"/>
+		</wsdl:operation>
+
+	</wsdl:portType>
+	<wsdl:binding name="SalesOrder_DSSSOAP11Binding" type="ns0:SalesOrder_DSSPortType">
+		<soap:binding transport="http://schemas.xmlsoap.org/soap/http" style="document"/>
+		<wsdl:operation name="createSaleOrder">
+			<soap:operation soapAction="urn:createSaleOrder" style="document"/>
+			<wsdl:input>
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal"/>
+			</wsdl:output>
+			<wsdl:fault name="DataServiceFault">
+				<soap:fault use="literal" name="DataServiceFault"/>
+			</wsdl:fault>
+		</wsdl:operation>
+		<wsdl:operation name="fetchallsaleorder">
+			<soap:operation soapAction="urn:fetchallsaleorder" style="document"/>
+			<wsdl:input>
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal"/>
+			</wsdl:output>
+			<wsdl:fault name="DataServiceFault">
+				<soap:fault use="literal" name="DataServiceFault"/>
+			</wsdl:fault>
+		</wsdl:operation>
+		<wsdl:operation name="updateItemsDetails">
+			<soap:operation soapAction="urn:updateItemsDetails" style="document"/>
+			<wsdl:input>
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal"/>
+			</wsdl:output>
+			<wsdl:fault name="DataServiceFault">
+				<soap:fault use="literal" name="DataServiceFault"/>
+			</wsdl:fault>
+		</wsdl:operation>
+		<wsdl:operation name="fetchItemByType">
+			<soap:operation soapAction="urn:fetchItemByType" style="document"/>
+			<wsdl:input>
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal"/>
+			</wsdl:output>
+			<wsdl:fault name="DataServiceFault">
+				<soap:fault use="literal" name="DataServiceFault"/>
+			</wsdl:fault>
+		</wsdl:operation>
+		<wsdl:operation name="fetchItemQuantity">
+			<soap:operation soapAction="urn:fetchItemQuantity" style="document"/>
+			<wsdl:input>
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal"/>
+			</wsdl:output>
+			<wsdl:fault name="DataServiceFault">
+				<soap:fault use="literal" name="DataServiceFault"/>
+			</wsdl:fault>
+		</wsdl:operation>
+		</wsdl:binding>
+	<wsdl:binding name="SalesOrder_DSSSOAP12Binding" type="ns0:SalesOrder_DSSPortType">
+		<soap12:binding transport="http://schemas.xmlsoap.org/soap/http" style="document"/>
+		<wsdl:operation name="createSaleOrder">
+			<soap12:operation soapAction="urn:createSaleOrder" style="document"/>
+			<wsdl:input>
+				<soap12:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output>
+				<soap12:body use="literal"/>
+			</wsdl:output>
+			<wsdl:fault name="DataServiceFault">
+				<soap12:fault use="literal" name="DataServiceFault"/>
+			</wsdl:fault>
+		</wsdl:operation>
+		<wsdl:operation name="fetchallsaleorder">
+			<soap12:operation soapAction="urn:fetchallsaleorder" style="document"/>
+			<wsdl:input>
+				<soap12:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output>
+				<soap12:body use="literal"/>
+			</wsdl:output>
+			<wsdl:fault name="DataServiceFault">
+				<soap12:fault use="literal" name="DataServiceFault"/>
+			</wsdl:fault>
+		</wsdl:operation>
+		<wsdl:operation name="updateItemsDetails">
+			<soap12:operation soapAction="urn:updateItemsDetails" style="document"/>
+			<wsdl:input>
+				<soap12:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output>
+				<soap12:body use="literal"/>
+			</wsdl:output>
+			<wsdl:fault name="DataServiceFault">
+				<soap12:fault use="literal" name="DataServiceFault"/>
+			</wsdl:fault>
+		</wsdl:operation>
+		<wsdl:operation name="fetchItemByType">
+			<soap12:operation soapAction="urn:fetchItemByType" style="document"/>
+			<wsdl:input>
+				<soap12:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output>
+				<soap12:body use="literal"/>
+			</wsdl:output>
+			<wsdl:fault name="DataServiceFault">
+				<soap12:fault use="literal" name="DataServiceFault"/>
+			</wsdl:fault>
+		</wsdl:operation>
+		<wsdl:operation name="fetchItemQuantity">
+			<soap12:operation soapAction="urn:fetchItemQuantity" style="document"/>
+			<wsdl:input>
+				<soap12:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output>
+				<soap12:body use="literal"/>
+			</wsdl:output>
+			<wsdl:fault name="DataServiceFault">
+				<soap12:fault use="literal" name="DataServiceFault"/>
+			</wsdl:fault>
+		</wsdl:operation>
+			</wsdl:binding>
+	<wsdl:binding name="SalesOrder_DSSHttpBinding" type="ns0:SalesOrder_DSSPortType">
+		<http:binding verb="POST"/>
+		<wsdl:operation name="createSaleOrder">
+			<http:operation location="createSaleOrder"/>
+			<wsdl:input>
+				<mime:content type="text/xml" part="parameters"/>
+			</wsdl:input>
+			<wsdl:output>
+				<mime:content type="text/xml" part="parameters"/>
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="fetchallsaleorder">
+			<http:operation location="fetchallsaleorder"/>
+			<wsdl:input>
+				<mime:content type="text/xml" part="parameters"/>
+			</wsdl:input>
+			<wsdl:output>
+				<mime:content type="text/xml" part="parameters"/>
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="updateItemsDetails">
+			<http:operation location="updateItemsDetails"/>
+			<wsdl:input>
+				<mime:content type="text/xml" part="parameters"/>
+			</wsdl:input>
+			<wsdl:output>
+				<mime:content type="text/xml" part="parameters"/>
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="fetchItemByType">
+			<http:operation location="fetchItemByType"/>
+			<wsdl:input>
+				<mime:content type="text/xml" part="parameters"/>
+			</wsdl:input>
+			<wsdl:output>
+				<mime:content type="text/xml" part="parameters"/>
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="fetchItemQuantity">
+			<http:operation location="fetchItemQuantity"/>
+			<wsdl:input>
+				<mime:content type="text/xml" part="parameters"/>
+			</wsdl:input>
+			<wsdl:output>
+				<mime:content type="text/xml" part="parameters"/>
+			</wsdl:output>
+		</wsdl:operation>
+	</wsdl:binding>
+	<wsdl:service name="SalesOrder_DSS">
+		<wsdl:port name="SOAP11Endpoint" binding="ns0:SalesOrder_DSSSOAP11Binding">
+			<soap:address location="http://192.168.93.167:9765/services/SalesOrder_DSS.SOAP11Endpoint/"/>
+		</wsdl:port>
+		<wsdl:port name="SecureSOAP11Endpoint" binding="ns0:SalesOrder_DSSSOAP11Binding">
+			<soap:address location="https://192.168.93.167:9445/services/SalesOrder_DSS.SecureSOAP11Endpoint/"/>
+		</wsdl:port>
+		<wsdl:port name="SecureSOAP12Endpoint" binding="ns0:SalesOrder_DSSSOAP12Binding">
+			<soap12:address location="https://192.168.93.167:9445/services/SalesOrder_DSS.SecureSOAP12Endpoint/"/>
+		</wsdl:port>
+		<wsdl:port name="SOAP12Endpoint" binding="ns0:SalesOrder_DSSSOAP12Binding">
+			<soap12:address location="http://192.168.93.167:9765/services/SalesOrder_DSS.SOAP12Endpoint/"/>
+		</wsdl:port>
+		<wsdl:port name="HTTPEndpoint" binding="ns0:SalesOrder_DSSHttpBinding">
+			<http:address location="http://192.168.93.167:9765/services/SalesOrder_DSS.HTTPEndpoint/"/>
+		</wsdl:port>
+		<wsdl:port name="SecureHTTPEndpoint" binding="ns0:SalesOrder_DSSHttpBinding">
+			<http:address location="https://192.168.93.167:9445/services/SalesOrder_DSS.SecureHTTPEndpoint/"/>
+		</wsdl:port>
+	</wsdl:service>
+</wsdl:definitions>

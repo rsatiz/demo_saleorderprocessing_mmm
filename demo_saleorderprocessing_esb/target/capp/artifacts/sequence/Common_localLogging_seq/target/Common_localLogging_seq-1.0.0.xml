@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sequence name="Common_localLogging_seq" trace="disable" xmlns="http://ws.apache.org/ns/synapse">
+  <call-template target="gov:/demo/common/utils/templates/standard_logging_st">
+    <with-param name="WST_INTEGRATION_NAME"
+      value="{get-property('WST_INTEGRATION_NAME')}" xmlns:ns="http://org.apache.synapse/xsd"/>
+    <with-param name="WST_INTEGRATION_STEP"
+      value="{get-property('WST_INTEGRATION_STEP')}" xmlns:ns="http://org.apache.synapse/xsd"/>
+    <with-param name="WST_CORRELATION_ID"
+      value="{get-property('WST_CORRELATION_ID')}" xmlns:ns="http://org.apache.synapse/xsd"/>
+    <with-param name="WST_CODE" value="{get-property('WST_CODE')}" xmlns:ns="http://org.apache.synapse/xsd"/>
+    <with-param name="WST_MSG" value="{get-property('WST_MSG')}" xmlns:ns="http://org.apache.synapse/xsd"/>
+    <with-param name="WST_CATEGORY" value="INFO"/>
+    <with-param name="WST_LEVEL" value="Full"/>
+    <with-param name="WST_DROP_YN" value="N"/>
+  </call-template>
+</sequence>

@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sequence name="demo_saleorderprocessing_main_seq" trace="disable" xmlns="http://ws.apache.org/ns/synapse">
+  <property name="WST_INTEGRATION_NAME" scope="default" type="STRING" value="demo_saleorderprocessing_proxy"/>
+  <property name="WST_INTEGRATION_STEP" scope="default" type="STRING" value="demo_saleorderprocessing_main_seq"/>
+  <property name="WST_LEVEL" scope="default" type="STRING" value="DEBUG"/>
+  <sequence key="Common_localLogging_seq"/>
+  <switch source="get-property('Action')">
+    <case regex=".*fetchItemByType">
+      <sequence key="demo_saleorderprocessing_fetch_item_gs_seq"/>
+    </case>
+    <case regex=".*createSaleOrder">
+      <property
+        expression="get-property('registry', 'gov:/demo/common/utils/properties/Common_Global_Parameters.xml')"
+        name="globalProperties" scope="default" type="OM" xmlns:ns="http://org.apache.synapse/xsd"/>
+      <property expression="//dat:storeindicator" name="storeindicator"
+        scope="default" type="STRING" xmlns:dat="http://ws.wso2.org/dataservice"/>
+      <property
+        expression="$ctx:globalProperties//storeinfo/storeid[@name=get-property('storeindicator')]"
+        name="storeid" scope="default" type="STRING"/>
+      <sequence key="demo_saleorderprocessing_createso_gs_seq"/>
+    </case>
+    <case regex=".*updateItemsDetails">
+      <sequence key="demo_saleorderprocessing_update_quantity_gs_seq"/>
+    </case>
+    <case regex=".*fetchItemQuantity">
+      <sequence key="demo_saleorderprocessing_total_quantity_aggregate_seq"/>
+    </case>
+    <case regex=".*fetchallsaleorder">
+      <sequence key="demo_saleorderprocessing_fetch_saleorder_seq"/>
+    </case>
+    <default>
+      <property name="WST_MSG" scope="default" type="STRING" value="not a valid action to perform"/>
+      <sequence key="Common_localLogging_seq"/>
+      <drop/>
+    </default>
+  </switch>
+</sequence>

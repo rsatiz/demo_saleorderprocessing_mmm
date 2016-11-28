@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<proxy name="demo_saleorderprocessing_proxy" startOnLoad="true"
+  statistics="enable" trace="disable" transports="https http" xmlns="http://ws.apache.org/ns/synapse">
+  <target faultSequence="demo_saleorderprocessing_fault_seq"
+    inSequence="demo_saleorderprocessing_main_seq" outSequence="demo_saleorderprocessing_out_seq"/>
+  <publishWSDL key="gov:/demo/saleorder/resources/wsdl/SalesOrder_DSS.wsdl"/>
+</proxy>

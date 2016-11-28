@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?><artifacts>
+    <artifact name="Common_localLogging_seq" groupId="com.example.demo_saleorderprocessing_esb.sequence" version="1.0.0" type="synapse/sequence" serverRole="EnterpriseServiceBus">
+        <file>src/main/synapse-config/sequences/Common_localLogging_seq.xml</file>
+    </artifact>
+    <artifact name="demo_saleorderprocessing_createso_gs_seq" groupId="com.example.demo_saleorderprocessing_esb.sequence" version="1.0.0" type="synapse/sequence" serverRole="EnterpriseServiceBus">
+        <file>src/main/synapse-config/sequences/demo_saleorderprocessing_createso_gs_seq.xml</file>
+    </artifact>
+    <artifact name="demo_saleorderprocessing_fetch_item_gs_seq" groupId="com.example.demo_saleorderprocessing_esb.sequence" version="1.0.0" type="synapse/sequence" serverRole="EnterpriseServiceBus">
+        <file>src/main/synapse-config/sequences/demo_saleorderprocessing_fetch_item_gs_seq.xml</file>
+    </artifact>
+    <artifact name="demo_saleorderprocessing_main_seq" groupId="com.example.demo_saleorderprocessing_esb.sequence" version="1.0.0" type="synapse/sequence" serverRole="EnterpriseServiceBus">
+        <file>src/main/synapse-config/sequences/demo_saleorderprocessing_main_seq.xml</file>
+    </artifact>
+    <artifact name="demo_saleorderprocessing_out_seq" groupId="com.example.demo_saleorderprocessing_esb.sequence" version="1.0.0" type="synapse/sequence" serverRole="EnterpriseServiceBus">
+        <file>src/main/synapse-config/sequences/demo_saleorderprocessing_out_seq.xml</file>
+    </artifact>
+    <artifact name="demo_saleorderprocessing_total_quantity_aggregate_seq" groupId="com.example.demo_saleorderprocessing_esb.sequence" version="1.0.0" type="synapse/sequence" serverRole="EnterpriseServiceBus">
+        <file>src/main/synapse-config/sequences/demo_saleorderprocessing_total_quantity_aggregate_seq.xml</file>
+    </artifact>
+    <artifact name="demo_saleorderprocessing_update_quantity_gs_seq" groupId="com.example.demo_saleorderprocessing_esb.sequence" version="1.0.0" type="synapse/sequence" serverRole="EnterpriseServiceBus">
+        <file>src/main/synapse-config/sequences/demo_saleorderprocessing_update_quantity_gs_seq.xml</file>
+    </artifact>
+    <artifact name="demo_saleorderprocessing_proxy" groupId="com.example.demo_saleorderprocessing_esb.proxy-service" version="1.0.0" type="synapse/proxy-service" serverRole="EnterpriseServiceBus">
+        <file>src/main/synapse-config/proxy-services/demo_saleorderprocessing_proxy.xml</file>
+    </artifact>
+    <artifact name="errorHandler_store" groupId="com.example.demo_saleorderprocessing_esb.message-store" version="1.0.0" type="synapse/message-store" serverRole="EnterpriseServiceBus">
+        <file>src/main/synapse-config/message-stores/errorHandler_store.xml</file>
+    </artifact>
+    <artifact name="demo_saleorderprocessing_errorhandler_seq" groupId="com.example.demo_saleorderprocessing_esb.sequence" version="1.0.0" type="synapse/sequence" serverRole="EnterpriseServiceBus">
+        <file>src/main/synapse-config/sequences/demo_saleorderprocessing_errorhandler_seq.xml</file>
+    </artifact>
+    <artifact name="demo_saleorderprocessing_deadletter_seq" groupId="com.example.demo_saleorderprocessing_esb.sequence" version="1.0.0" type="synapse/sequence" serverRole="EnterpriseServiceBus">
+        <file>src/main/synapse-config/sequences/demo_saleorderprocessing_deadletter_seq.xml</file>
+    </artifact>
+    <artifact name="DeadLetter_store" groupId="com.example.demo_saleorderprocessing_esb.message-store" version="1.0.0" type="synapse/message-store" serverRole="EnterpriseServiceBus">
+        <file>src/main/synapse-config/message-stores/DeadLetter_store.xml</file>
+    </artifact>
+    <artifact name="errorHandler_processor" groupId="com.example.demo_saleorderprocessing_esb.message-processors" version="1.0.0" type="synapse/message-processors" serverRole="EnterpriseServiceBus">
+        <file>src/main/synapse-config/message-processors/errorHandler_processor.xml</file>
+    </artifact>
+    <artifact name="demo_saleorderprocessing_fetch_saleorder_seq" groupId="com.example.demo_saleorderprocessing_esb.sequence" version="1.0.0" type="synapse/sequence" serverRole="EnterpriseServiceBus">
+        <file>src/main/synapse-config/sequences/demo_saleorderprocessing_fetch_saleorder_seq.xml</file>
+    </artifact>
+    <artifact name="demo_saleorderprocessing_retry_seq" groupId="com.example.demo_saleorderprocessing_esb.sequence" version="1.0.0" type="synapse/sequence" serverRole="EnterpriseServiceBus">
+        <file>src/main/synapse-config/sequences/demo_saleorderprocessing_retry_seq.xml</file>
+    </artifact>
+    <artifact name="demo_saleorderprocessing_endpoint_seq" groupId="com.example.demo_saleorderprocessing_esb.sequence" version="1.0.0" type="synapse/sequence" serverRole="EnterpriseServiceBus">
+        <file>src/main/synapse-config/sequences/demo_saleorderprocessing_endpoint_seq.xml</file>
+    </artifact>
+    <artifact name="retryHandler_processor" groupId="com.example.demo_saleorderprocessing_esb.message-processors" version="1.0.0" type="synapse/message-processors" serverRole="EnterpriseServiceBus">
+        <file>src/main/synapse-config/message-processors/retryHandler_processor.xml</file>
+    </artifact>
+    <artifact name="demo_saleorderprocessing_fault_seq" groupId="com.example.demo_saleorderprocessing_esb.sequence" version="1.0.0" type="synapse/sequence" serverRole="EnterpriseServiceBus">
+        <file>src/main/synapse-config/sequences/demo_saleorderprocessing_fault_seq.xml</file>
+    </artifact>
+</artifacts>

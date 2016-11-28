@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sequence name="demo_saleorderprocessing_retry_seq" trace="disable" xmlns="http://ws.apache.org/ns/synapse">
+  <property name="WST_INTEGRATION_STEP" scope="default" type="STRING" value="demo_saleorderprocessing_retry_seq"/>
+  <sequence key="Common_localLogging_seq"/>
+  <property expression="local-name($body/*[1])" name="operation"
+    scope="default" type="STRING"/>
+  <switch source="get-property('operation')">
+    <case regex=".*createSaleOrder_batch_req">
+      <header name="Action" scope="default" value="createSaleOrder_batch_req"/>
+    </case>
+    <case regex=".*createSaleOrder_gs_batch_req">
+      <header name="Action" scope="default" value="createSaleOrder_gs_batch_req"/>
+    </case>
+    <case regex=".*updateItemsDetails">
+      <header name="Action" scope="default" value="updateItemsDetails"/>
+    </case>
+    <default/>
+  </switch>
+  <sequence key="demo_saleorderprocessing_endpoint_seq"/>
+</sequence>

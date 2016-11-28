@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sequence name="demo_saleorderprocessing_errorhandler_seq"
+  trace="disable" xmlns="http://ws.apache.org/ns/synapse">
+  <property name="WST_INTEGRATION_STEP" scope="default" type="STRING" value="demo_saleorderprocessing_errorhandler_seq"/>
+  <sequence key="Common_localLogging_seq"/>
+  <store messageStore="errorHandler_store"/>
+  <drop/>
+</sequence>

@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sequence name="demo_saleorderprocessing_createso_gs_seq"
+  trace="disable" xmlns="http://ws.apache.org/ns/synapse">
+  <property name="WST_INTEGRATION_STEP" scope="default" type="STRING" value="demo_saleorderprocessing_createso_gs_seq"/>
+  <sequence key="Common_localLogging_seq"/>
+  <switch source="get-property('storeid')">
+    <case regex="1">
+      <property name="WST_MSG" scope="default" type="STRING" value="inside Mongo save sequence"/>
+      <xslt key="gov:/demo/saleorder/resources/xslt/create_Saleorder_batch.xslt">
+        <property expression="get-property('storeid')" name="storeid"/>
+      </xslt>
+      <header
+        expression="fn:concat(get-property('Action'),'_batch_req')"
+        name="Action" scope="default"/>
+      <sequence key="Common_localLogging_seq"/>
+    </case>
+    <case regex="2">
+      <property name="WST_MSG" scope="default" type="STRING" value="inside Mongo Google Spreadsheet save sequence"/>
+      <xslt key="gov:/demo/saleorder/resources/xslt/create_Saleorder_batch.xslt">
+        <property expression="get-property('storeid')" name="storeid"/>
+      </xslt>
+      <header
+        expression="fn:concat(get-property('Action'),'_gs_batch_req')"
+        name="Action" scope="default"/>
+      <sequence key="Common_localLogging_seq"/>
+    </case>
+    <default>
+      <property name="WST_MSG" scope="default" type="STRING" value="Not A Valid Source"/>
+      <sequence key="Common_localLogging_seq"/>
+      <drop/>
+    </default>
+  </switch>
+  <sequence key="demo_saleorderprocessing_endpoint_seq"/>
+</sequence>

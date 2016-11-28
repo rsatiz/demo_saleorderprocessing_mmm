@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sequence name="demo_saleorderprocessing_fetch_item_gs_seq"
+  trace="disable" xmlns="http://ws.apache.org/ns/synapse">
+  <property name="WST_INTEGRATION_STEP" scope="default" type="STRING" value="demo_saleorderprocessing_fetch_item_gs_seq"/>
+  <sequence key="Common_localLogging_seq"/>
+  <clone id="fetch_item_aggr_id">
+    <target>
+      <sequence>
+        <property name="WST_MSG" scope="default" type="STRING" value="inside Google Spreadsheet item fetch sequence"/>
+        <payloadFactory media-type="xml">
+          <format>
+            <dat:fetchItemByType_gs xmlns:dat="http://ws.wso2.org/dataservice">
+              <dat:type>$1</dat:type>
+              <dat:name>$2</dat:name>
+            </dat:fetchItemByType_gs>
+          </format>
+          <args>
+            <arg evaluator="xml" expression="//dat:type"
+              xmlns:dat="http://ws.wso2.org/dataservice"
+              xmlns:ns3="http://org.apache.synapse/xsd" xmlns:soapenv="http://www.w3.org/2003/05/soap-envelope"/>
+            <arg evaluator="xml" expression="//dat:name"
+              xmlns:dat="http://ws.wso2.org/dataservice"
+              xmlns:ns3="http://org.apache.synapse/xsd" xmlns:soapenv="http://www.w3.org/2003/05/soap-envelope"/>
+          </args>
+        </payloadFactory>
+        <header name="Action" scope="default" value="urn:fetchItemByType_gs"/>
+        <sequence key="Common_localLogging_seq"/>
+        <call>
+          <endpoint key="gov:/demo/saleorder/resources/endpoint/saleorder_dss_ep"/>
+        </call>
+      </sequence>
+    </target>
+    <target>
+      <sequence>
+        <property name="WST_MSG" scope="default" type="STRING" value="inside Mongo item fetch sequence"/>
+        <header expression="get-property('Action')" name="Action" scope="default"/>
+        <sequence key="Common_localLogging_seq"/>
+        <call>
+          <endpoint key="gov:/demo/saleorder/resources/endpoint/saleorder_dss_ep"/>
+        </call>
+      </sequence>
+    </target>
+  </clone>
+  <aggregate id="fetch_item_aggr_id">
+    <completeCondition>
+      <messageCount max="-1" min="2"/>
+    </completeCondition>
+    <onComplete expression="//m0:dataresponse/m0:result"
+      xmlns:m0="http://ws.wso2.org/dataservice" xmlns:ns="http://org.apache.synapse/xsd">
+      <!--property name="WST_MSG" scope="default" type="STRING" value="inside aggregate sequence before enrich"/>
+      <sequence key="Common_localLogging_seq"/>
+      <enrich>
+        <source xmlns:m1="http://ws.wso2.org/dataservice" xpath="//m1:dataresponse/m1:result"/>
+        <target type="body"/>
+      </enrich>
+      <property name="WST_MSG" scope="default" type="STRING" value="inside aggregate sequence after enrich"/-->
+      <sequence key="Common_localLogging_seq"/>
+      <send/>
+    </onComplete>
+  </aggregate>
+</sequence>
